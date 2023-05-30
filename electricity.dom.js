@@ -85,5 +85,20 @@ function btnBuy_onClick() {
 }
 
 function btnUse_onClick() {
+    var applianceSelected = "";
+    
+    // Loop through the radio buttons
+    for (var i = 0; i < appliancesRadioElem.length; i++) {
+        if (appliancesRadioElem[i].checked) {
+          // Get the value of the selected radio button
+          applianceSelected = Number(appliancesRadioElem[i].value);
+          electricity.useAppliance(applianceSelected);
+          break; // Exit the loop once the selected radio button is found
+        }
+    }
+    unitsAvailableElem.innerHTML = electricity.getUnitsAvailable().toFixed(2);
+
+
+    
 
 }

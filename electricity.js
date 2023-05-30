@@ -8,7 +8,8 @@ function Electricity() {
     var unitsBought = Number(localStoreUnitsBoughtVal) || 0;
     var amountSpent = Number(localStoreAmountSpentVal) || 0;
     var advance = localStoreAdvanceTakenVal || false;
-
+    var advanceAmount = Number(localStorage.getItem('advanceAmount')) || 0;
+    //console.log(advanceAmount);
     // do we want to go with this or array? 
     let appliances = {
         'Stove': 10, 
@@ -18,21 +19,42 @@ function Electricity() {
     };
 
     function topUpElectricity(amount) {
+       
         switch(amount){
             case 10:
-                unitsBought += 7;
-                unitsAvailable += 7;
-                amountSpent += Number(amount);
+                
+                /*if(advanceAmount > 0 && amount < advanceAmount) {
+                    advanceAmount -= amount;
+                }
+                else if((advanceAmount > 0 && amount > advanceAmount)) {
+                    amount -= advanceAmount;*/
+                    unitsBought += 7;
+                    unitsAvailable += 7;
+                    amountSpent += Number(amount);
+                //}
+                
                 break;
             case 20:
-                unitsBought += 14;
-                unitsAvailable += 14;
-                amountSpent += Number(amount);
+                /*if(advanceAmount > 0 && amount < advanceAmount) {
+                    advanceAmount -= amount;
+                }
+                else if((advanceAmount > 0 && amount > advanceAmount)) {
+                    amount -= advanceAmount;*/
+                    unitsBought += 14;
+                    unitsAvailable += 14;
+                    amountSpent += Number(amount);
+                //}
                 break;
             case 50:
-                unitsBought += 35;
-                unitsAvailable += 35;
-                amountSpent += Number(amount);
+                /*if(advanceAmount > 0 && amount < advanceAmount) {
+                    advanceAmount -= amount;
+                }
+                else if((advanceAmount > 0 && amount > advanceAmount)) {
+                    amount -= advanceAmount;*/
+                    unitsBought += 35;
+                    unitsAvailable += 35;
+                    amountSpent += Number(amount);
+                //}
                 break;
             case "advance":
                 advanceTaken();
@@ -50,8 +72,8 @@ function Electricity() {
     */
     function useAppliance(appliance) {
         if(appliance in appliances){
-            if(unitsAvailable >= appliances[appliance]) {
-                unitsAvailable -= appliances[appliance];
+            if(Number(unitsAvailable) >= Number(appliances[appliance])) {
+                unitsAvailable -= Number(appliances[appliance]);
                 
                 return true;
             }
@@ -64,23 +86,30 @@ function Electricity() {
     }
 
     function advanceTaken() {
+        //console.log(advance);
+        //console.log(advanceAmount);
         if(advance === false){
             advance = true;
+            
             unitsBought += 21;
             unitsAvailable += 21;
-            
-            return true;
+            advanceAmount +=  30; 
         }
-        else if(advance === true){
-            amountSpent +=  30;
+        else if(advance === true && advanceAmount > 0){
+             advance = true;
+        }
+        else if(advance === true && advanceAmount == 0){
+            advance = false;            
+        }
 
-            advance = false;
-            return false;
-        }
+        return advance;
     }
 
     function totalAmountSpent() {
         //localStorage["amountSpent"] = amountSpent;
+        /*if(advanceAmount > 0){
+            amount
+        }*/
         return amountSpent;
     }
 
