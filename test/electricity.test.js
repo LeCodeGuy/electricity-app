@@ -82,11 +82,15 @@ describe("The buy electricity app", function () {
     it("should allow a user to take advance and pay for the advance and use appliances", function () {
 
         const electricity = Electricity();
-
+        console.log(electricity.getUnitsAvailable());
         electricity.topUpElectricity('advance');
+        console.log(electricity.getUnitsAvailable());
+        
         assert.isTrue(electricity.advanceTaken());
+        console.log("advance taken:" + electricity.advanceTaken());
 
         electricity.topUpElectricity(20);
+        console.log(electricity.getUnitsAvailable());
         assert.equal(21, electricity.getUnitsAvailable());
         assert.isTrue(electricity.advanceTaken());
 
