@@ -71,7 +71,7 @@ function btnUse_onClick() {
         if (appliancesRadioElem[i].checked) {
           // Get the value of the selected radio button
           applianceSelected = electricity.titleCase(appliancesRadioElem[i].value);
-          console.log(applianceSelected);
+          // use the appliance selected
           electricity.useAppliance(applianceSelected);
           break; // Exit the loop once the selected radio button is found
         }
