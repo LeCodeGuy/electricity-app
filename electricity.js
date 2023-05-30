@@ -9,12 +9,12 @@ function Electricity() {
     var amountSpent = Number(localStoreAmountSpentVal) || 0;
     var advance = localStoreAdvanceTakenVal || false;
     var advanceAmount = Number(localStorage.getItem('advanceAmount')) || 0;
-    //console.log(advanceAmount);
+    
     // do we want to go with this or array? 
     let appliances = {
         'Stove': 10, 
         'Kettle': 5, 
-        'TV': 3, 
+        'Tv': 3, 
         'Fridge': 13
     };
 
@@ -31,6 +31,9 @@ function Electricity() {
                     unitsBought += 7;
                     unitsAvailable += 7;
                     amountSpent += Number(amount);
+                    localStorage['unitsAvailable'] =Number(unitsAvailable);
+                    localStorage['unitsBought'] = Number(unitsBought);
+                    localStorage['amountSpent'] = Number(amountSpent);
                 //}
                 
                 break;
@@ -43,6 +46,10 @@ function Electricity() {
                     unitsBought += 14;
                     unitsAvailable += 14;
                     amountSpent += Number(amount);
+
+                    localStorage['unitsAvailable'] =Number(unitsAvailable);
+                    localStorage['unitsBought'] = Number(unitsBought);
+                    localStorage['amountSpent'] = Number(amountSpent);
                 //}
                 break;
             case 50:
@@ -54,6 +61,10 @@ function Electricity() {
                     unitsBought += 35;
                     unitsAvailable += 35;
                     amountSpent += Number(amount);
+
+                    localStorage['unitsAvailable'] =Number(unitsAvailable);
+                    localStorage['unitsBought'] = Number(unitsBought);
+                    localStorage['amountSpent'] = Number(amountSpent);
                 //}
                 break;
             case "advance":
@@ -72,9 +83,11 @@ function Electricity() {
     */
     function useAppliance(appliance) {
         if(appliance in appliances){
+
             if(Number(unitsAvailable) >= Number(appliances[appliance])) {
                 unitsAvailable -= Number(appliances[appliance]);
-                
+                localStorage['unitsAvailable'] -= Number(appliances[appliance]);
+                    
                 return true;
             }
             else{
@@ -117,13 +130,33 @@ function Electricity() {
         return unitsBought;
     }
 
+    function titleCase(str) {
+        //keep track of the original string passed
+        const originalStr = str;
+        const regexHyphen = /-/
+        str = str.toLowerCase().split(/\s|-/);
+
+        for (var i = 0; i < str.length; i++) {
+          str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+        }
+
+        if(regexHyphen.test(originalStr)=== true){
+           str = str.join('-')
+        }
+        else{
+            str = str.join(' ');
+        }
+
+        return str;
+      }      
     return {
         advanceTaken,
         topUpElectricity,
         getUnitsAvailable,
         useAppliance,
         totalAmountSpent,
-        totalUnitsBought
+        totalUnitsBought,
+        titleCase
 
     }
 }

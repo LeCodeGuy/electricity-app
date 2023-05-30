@@ -21,25 +21,25 @@ btnUseElem.addEventListener("click", btnUse_onClick);
 //check if a value for the unitsAvailable is stored in localStorage
 if (localStorage['unitsAvailable']){
     // ensure counter is a number and set it to the innerHTML
-    unitsAvailableElem.innerHTML = Number(localStorage['unitsAvailable']);
+    unitsAvailableElem.innerHTML = Number(localStorage['unitsAvailable']).toFixed(2);
 };
 
 //check if a value for the unitsBought is stored in localStorage
 if (localStorage['unitsBought']){
     // ensure counter is a number and set it to the innerHTML
-    totalUnitsBoughtElem.innerHTML = Number(localStorage['unitsBought']);
+    totalUnitsBoughtElem.innerHTML = Number(localStorage['unitsBought']).toFixed(2);
 };
 
 //check if a value for the amountSpent is stored in localStorage
 if (localStorage['amountSpent']){
     // ensure counter is a number and set it to the innerHTML
-    totalAmountSpentElem.innerHTML = Number(localStorage['amountSpent']);
+    totalAmountSpentElem.innerHTML = Number(localStorage['amountSpent']).toFixed(2);
 };
 
 //check if a value for the advanceTaken is stored in localStorage
 if (localStorage['advanceTaken']){
     // ensure counter is a number and set it to the innerHTML
-    advanceTakenElem.innerHTML = Number(localStorage['advanceTaken']);
+    advanceTakenElem.innerHTML = Number(localStorage['advanceTaken']).toFixed(2);
 };
 
 // DOM events here
@@ -91,7 +91,8 @@ function btnUse_onClick() {
     for (var i = 0; i < appliancesRadioElem.length; i++) {
         if (appliancesRadioElem[i].checked) {
           // Get the value of the selected radio button
-          applianceSelected = Number(appliancesRadioElem[i].value);
+          applianceSelected = electricity.titleCase(appliancesRadioElem[i].value);
+          console.log(applianceSelected);
           electricity.useAppliance(applianceSelected);
           break; // Exit the loop once the selected radio button is found
         }
