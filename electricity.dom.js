@@ -56,31 +56,10 @@ function btnBuy_onClick() {
         }
     }
     
-    
-    if(localStorage.length > 0 ){
-        unitsAvailableElem.innerHTML = Number(localStorage['unitsAvailable']).toFixed(2);
-        totalUnitsBoughtElem.innerHTML = Number(localStorage['unitsBought']).toFixed(2);
-        totalAmountSpentElem.innerHTML = Number(localStorage['amountSpent']).toFixed(2);
-        //advanceTakenElem.innerHTML = Number(localStorage['advanceTaken']);
-        if(Number(localStorage['advanceTaken']) === true) {
-            advanceTakenElem.classList.replace('hidden','visible');
-        }
-        else {
-            advanceTakenElem.classList.replace('visible','hidden');
-        };
-    }
-    else {
-        unitsAvailableElem.innerHTML = electricity.getUnitsAvailable().toFixed(2);
-        totalUnitsBoughtElem.innerHTML = electricity.totalUnitsBought().toFixed(2);
-        totalAmountSpentElem.innerHTML = electricity.totalAmountSpent().toFixed(2);
-        /*if(electricity.advanceTaken() === true) {
-            advanceTakenElem.classList.replace('hidden','visible');
-        }
-        else {
-            advanceTakenElem.classList.replace('visible','hidden');
-        };*/
-    }
-        
+    // sets the values for the totals
+    unitsAvailableElem.innerHTML = electricity.getUnitsAvailable().toFixed(2);
+    totalUnitsBoughtElem.innerHTML = electricity.totalUnitsBought().toFixed(2);
+    totalAmountSpentElem.innerHTML = electricity.totalAmountSpent().toFixed(2);        
 
 }
 
@@ -97,6 +76,7 @@ function btnUse_onClick() {
           break; // Exit the loop once the selected radio button is found
         }
     }
+    // updates the units available
     unitsAvailableElem.innerHTML = electricity.getUnitsAvailable().toFixed(2);
 
 

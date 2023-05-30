@@ -22,50 +22,39 @@ function Electricity() {
        
         switch(amount){
             case 10:
-                
-                /*if(advanceAmount > 0 && amount < advanceAmount) {
-                    advanceAmount -= amount;
-                }
-                else if((advanceAmount > 0 && amount > advanceAmount)) {
-                    amount -= advanceAmount;*/
-                    unitsBought += 7;
-                    unitsAvailable += 7;
-                    amountSpent += Number(amount);
-                    localStorage['unitsAvailable'] =Number(unitsAvailable);
-                    localStorage['unitsBought'] = Number(unitsBought);
-                    localStorage['amountSpent'] = Number(amountSpent);
-                //}
-                
+                // updates variables
+                unitsBought += 7;
+                unitsAvailable += 7;
+                amountSpent += Number(amount);
+
+                // updates localStorage values
+                localStorage['unitsAvailable'] =Number(unitsAvailable);
+                localStorage['unitsBought'] = Number(unitsBought);
+                localStorage['amountSpent'] = Number(amountSpent);                
                 break;
             case 20:
-                /*if(advanceAmount > 0 && amount < advanceAmount) {
-                    advanceAmount -= amount;
-                }
-                else if((advanceAmount > 0 && amount > advanceAmount)) {
-                    amount -= advanceAmount;*/
-                    unitsBought += 14;
-                    unitsAvailable += 14;
-                    amountSpent += Number(amount);
+                // updates variables
+                unitsBought += 14;
+                unitsAvailable += 14;
+                amountSpent += Number(amount);
 
-                    localStorage['unitsAvailable'] =Number(unitsAvailable);
-                    localStorage['unitsBought'] = Number(unitsBought);
-                    localStorage['amountSpent'] = Number(amountSpent);
-                //}
+                // updates localStorage values
+                localStorage['unitsAvailable'] =Number(unitsAvailable);
+                localStorage['unitsBought'] = Number(unitsBought);
+                localStorage['amountSpent'] = Number(amountSpent);
+                
                 break;
             case 50:
-                /*if(advanceAmount > 0 && amount < advanceAmount) {
-                    advanceAmount -= amount;
-                }
-                else if((advanceAmount > 0 && amount > advanceAmount)) {
-                    amount -= advanceAmount;*/
-                    unitsBought += 35;
-                    unitsAvailable += 35;
-                    amountSpent += Number(amount);
+                // updates variables
+                unitsBought += 35;
+                unitsAvailable += 35;
+                amountSpent += Number(amount);
 
-                    localStorage['unitsAvailable'] =Number(unitsAvailable);
-                    localStorage['unitsBought'] = Number(unitsBought);
-                    localStorage['amountSpent'] = Number(amountSpent);
-                //}
+                // updates localStorage values
+                localStorage['unitsAvailable'] =Number(unitsAvailable);
+                localStorage['unitsBought'] = Number(unitsBought);
+                localStorage['amountSpent'] = Number(amountSpent);
+                
                 break;
             case "advance":
                 advanceTaken();
@@ -82,10 +71,13 @@ function Electricity() {
     * other wise return false and do nothing.
     */
     function useAppliance(appliance) {
+        //checks if the appliance selected is in the appliance object
         if(appliance in appliances){
-
+            // if the units available are more or equal to the usage for the appliance
             if(Number(unitsAvailable) >= Number(appliances[appliance])) {
+                // subtract the units used from the available units
                 unitsAvailable -= Number(appliances[appliance]);
+                // update the unitsAvailable in localStorage
                 localStorage['unitsAvailable'] -= Number(appliances[appliance]);
                     
                 return true;
@@ -99,8 +91,7 @@ function Electricity() {
     }
 
     function advanceTaken() {
-        //console.log(advance);
-        //console.log(advanceAmount);
+        
         if(advance === false){
             advance = true;
             
@@ -119,10 +110,6 @@ function Electricity() {
     }
 
     function totalAmountSpent() {
-        //localStorage["amountSpent"] = amountSpent;
-        /*if(advanceAmount > 0){
-            amount
-        }*/
         return amountSpent;
     }
 
@@ -131,20 +118,12 @@ function Electricity() {
     }
 
     function titleCase(str) {
-        //keep track of the original string passed
-        const originalStr = str;
-        const regexHyphen = /-/
+        // splits the string on spaces or hyphens
         str = str.toLowerCase().split(/\s|-/);
-
+        
+        // capitalize the first letter of the word
         for (var i = 0; i < str.length; i++) {
           str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
-        }
-
-        if(regexHyphen.test(originalStr)=== true){
-           str = str.join('-')
-        }
-        else{
-            str = str.join(' ');
         }
 
         return str;
