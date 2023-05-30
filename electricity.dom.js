@@ -8,9 +8,9 @@ let advanceTakenElem = document.querySelector(".advanceTaken");
 let appliancesRadioElem = document.getElementsByName("useElectricity");
 let btnUseElem = document.querySelector(".useNow");
 
-
-// Factory Function instance 
-const electricity =  Electricity();
+let localStoreUnitsAvailableVal;
+let localStoreUnitsBoughtVal;
+let localStoreAmountSpentVal;
 
 // add event listener for when the 'Buy' button is clicked
 btnBuyElem.addEventListener("click", btnBuy_onClick);
@@ -21,26 +21,34 @@ btnUseElem.addEventListener("click", btnUse_onClick);
 //check if a value for the unitsAvailable is stored in localStorage
 if (localStorage['unitsAvailable']){
     // ensure counter is a number and set it to the innerHTML
-    unitsAvailableElem.innerHTML = Number(localStorage['unitsAvailable']).toFixed(2);
+    localStoreUnitsAvailableVal = Number(localStorage.getItem('unitsAvailable'));
+    unitsAvailableElem.innerHTML = Number(localStorage.getItem('unitsAvailable')).toFixed(2);
+    
 };
 
 //check if a value for the unitsBought is stored in localStorage
 if (localStorage['unitsBought']){
     // ensure counter is a number and set it to the innerHTML
     totalUnitsBoughtElem.innerHTML = Number(localStorage['unitsBought']).toFixed(2);
+    localStoreUnitsBoughtVal = Number(localStorage.getItem('unitsBought'));
 };
 
 //check if a value for the amountSpent is stored in localStorage
 if (localStorage['amountSpent']){
     // ensure counter is a number and set it to the innerHTML
     totalAmountSpentElem.innerHTML = Number(localStorage['amountSpent']).toFixed(2);
+    localStoreAmountSpentVal = Number(localStorage.getItem('amountSpent'));
 };
 
 //check if a value for the advanceTaken is stored in localStorage
 if (localStorage['advanceTaken']){
     // ensure counter is a number and set it to the innerHTML
     advanceTakenElem.innerHTML = Number(localStorage['advanceTaken']).toFixed(2);
+    
 };
+
+// Factory Function instance 
+const electricity =  Electricity();
 
 // DOM events here
 function btnBuy_onClick() {
@@ -61,6 +69,11 @@ function btnBuy_onClick() {
     totalUnitsBoughtElem.innerHTML = electricity.totalUnitsBought().toFixed(2);
     totalAmountSpentElem.innerHTML = electricity.totalAmountSpent().toFixed(2);        
 
+    // update localStorage values
+    localStorage['amountSpent'] = Number(electricity.totalAmountSpent().toFixed(2));
+    localStorage['unitsAvailable'] = Number(electricity.getUnitsAvailable().toFixed(2));
+    localStorage['unitsBought'] = Number(electricity.totalUnitsBought().toFixed(2));
+                
 }
 
 function btnUse_onClick() {
@@ -78,7 +91,7 @@ function btnUse_onClick() {
     }
     // updates the units available
     unitsAvailableElem.innerHTML = electricity.getUnitsAvailable().toFixed(2);
-
+    localStorage['unitsAvailable'] = Number(electricity.getUnitsAvailable().toFixed(2));
 
     
 

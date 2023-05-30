@@ -113,7 +113,7 @@ describe("The buy electricity app", function () {
         const electricity = Electricity();
 
         electricity.topUpElectricity(50);
-        assert.isTrue(electricity.useAppliance('TV'));
+        assert.isTrue(electricity.useAppliance('Tv'));
         assert.isTrue(electricity.useAppliance('Kettle'));
 
         assert.equal(27, electricity.getUnitsAvailable());
@@ -126,16 +126,16 @@ describe("The buy electricity app", function () {
 
         electricity.topUpElectricity(10);
 
-        assert.isTrue(electricity.useAppliance('TV'));
+        assert.isTrue(electricity.useAppliance('Tv'));
         assert.equal(4, electricity.getUnitsAvailable());
         
         assert.isFalse(electricity.useAppliance('Stove'));
         assert.equal(4, electricity.getUnitsAvailable());
         
-        assert.isTrue(electricity.useAppliance('TV'));
+        assert.isTrue(electricity.useAppliance('Tv'));
         assert.equal(1, electricity.getUnitsAvailable());
 
-        assert.isFalse(electricity.useAppliance('TV'));
+        assert.isFalse(electricity.useAppliance('Tv'));
 
         assert.equal(1, electricity.getUnitsAvailable());
 
@@ -146,7 +146,7 @@ describe("The buy electricity app", function () {
         const electricity = Electricity();
 
         electricity.topUpElectricity(10);
-        assert.isTrue(electricity.useAppliance('TV'));
+        assert.isTrue(electricity.useAppliance('Tv'));
 
         // not enough electricity units (4 available)
         assert.isFalse(electricity.useAppliance('Stove'));
@@ -180,7 +180,7 @@ describe("The buy electricity app", function () {
         electricity.topUpElectricity(50);  // 35
         electricity.topUpElectricity(20);  // 14
 
-        electricity.useAppliance("TV")
+        electricity.useAppliance("Tv")
         electricity.useAppliance("Kettle")
 
         assert.equal(100, electricity.totalAmountSpent());
