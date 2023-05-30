@@ -73,12 +73,12 @@ function btnBuy_onClick() {
         unitsAvailableElem.innerHTML = electricity.getUnitsAvailable().toFixed(2);
         totalUnitsBoughtElem.innerHTML = electricity.totalUnitsBought().toFixed(2);
         totalAmountSpentElem.innerHTML = electricity.totalAmountSpent().toFixed(2);
-        if(electricity.advanceTaken() === true) {
+        /*if(electricity.advanceTaken() === true) {
             advanceTakenElem.classList.replace('hidden','visible');
         }
         else {
             advanceTakenElem.classList.replace('visible','hidden');
-        };
+        };*/
     }
         
 
